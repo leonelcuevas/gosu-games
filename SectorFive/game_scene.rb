@@ -16,6 +16,13 @@ class GameScene
     @enemies_appeared = 0
     @enemies_destroyed = 0
     @window = window
+
+    # load and start background music and sound effects
+    @music = Gosu::Song.new('sounds/Cephalopod.ogg')
+    @music.play(true)
+    
+    @explosion_sound = Gosu::Sample.new('sounds/explosion.ogg')
+    @shooting_sound = Gosu::Sample.new('sounds/shoot.ogg')
   end
 
   def update
@@ -40,6 +47,7 @@ class GameScene
           @bullets.delete bullet
           @explosions.push(Explosion.new(@window, enemy.x, enemy.y))
           @enemies_destroyed += 1
+          @explosion_sound.play
         end
       end
     end
@@ -78,6 +86,7 @@ class GameScene
   def button_down(id)
     if id == Gosu::KbSpace
       @bullets.push(Bullet.new(@window, @player.x, @player.y, @player.angle))
+      @shooting_sound.play(0.3)
     end
   end
 end

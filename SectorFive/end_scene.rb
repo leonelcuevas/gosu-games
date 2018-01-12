@@ -27,6 +27,10 @@ class EndScene
       @credits.push(CreditLine.new(@window, line.chomp, 100, y)) # fixed x = 100
       y += 30 # make each line appear below the others
     end
+
+    # load and start background music
+    @music = Gosu::Song.new('sounds/FromHere.ogg')
+    @music.play(true)
   end
 
   def update
