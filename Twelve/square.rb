@@ -50,4 +50,15 @@ class Square
     @@font.draw("#{@number}", x_text, y_text, 1)
   end
 
+
+  def clear
+    @number = 0
+  end
+
+
+  def set(color, number)
+    @color = color
+    @number = number
+  end
+
 end
