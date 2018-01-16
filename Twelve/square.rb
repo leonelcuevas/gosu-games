@@ -9,6 +9,9 @@ class Square
   @@colors  = { red: Gosu::Color.argb(0xaaff0000),
                 green: Gosu::Color.argb(0xaa00ff00),
                 blue: Gosu::Color.argb(0xaa0000ff)}
+  @@state_colors  = { start: Gosu::Color::WHITE,
+                      illegal: Gosu::Color::RED,
+                      legal: Gosu::Color::GREEN }
   @@font = Gosu::Font.new(FONT_SIZE)
   @@window = nil
 
@@ -50,6 +53,38 @@ class Square
     @@font.draw("#{@number}", x_text, y_text, 1)
   end
 
+
+  def highlight(state)
+    c = @@state_colors[state]
+    x1 = 22 + @column * 100
+    y1 = 22 + @row * 100
+    draw_horizontal_highlight(x1, y1, c)
+    draw_horizontal_highlight(x1, y1 + 92, c)
+    draw_vertical_highlight(x1, y1, c)
+    draw_vertical_highlight(x1 + 92, y1, c)
+  end
+
+  
+  def draw_horizontal_highlight(x1, y1, c)
+    x2 = x1 + 96
+    y2 = y1
+    x3 = x2
+    y3 = y1 + 4
+    x4 = x1
+    y4 = y3
+    @@window.draw_quad(x1, y1, c, x2, y2, c, x3, y3, c, x4, y4, c, 3)
+  end
+
+
+  def draw_vertical_highlight(x1, y1, c)
+    x2 = x1 + 4
+    y2 = y1
+    x3 = x2
+    y3 = y1 + 92
+    x4 = x1
+    y4 = y3
+    @@window.draw_quad(x1, y1, c, x2, y2, c, x3, y3, c, x4, y4, c, 3)
+  end
 
   def clear
     @number = 0

@@ -12,6 +12,11 @@ class Twelve < Gosu::Window
   end
 
 
+  def update
+    @game.handle_mouse_move(mouse_x, mouse_y)
+  end
+
+
   def draw
     @game.draw
   end
